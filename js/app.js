@@ -11,6 +11,35 @@ const getFormData = () => ({
     drivetrain: document.getElementById('drivetrain').value
 });
 
+function setupEventListeners() {
+    document.getElementById('calc-btn').addEventListener('click', updateCalculations);
+    setupsSliderAndInputSync();
+}
+
+function setupsSliderAndInputSync() {
+    const sliders = [
+        { id: 'weight-total' },
+        { id: 'weight-front' }
+    ];
+
+    sliders.forEach(s => {
+        const input = document.getElementById(s.id);
+        const slider = document.getElementById(s.id + '-slider');
+        if (input && slider) {
+            input.addEventListener('input', () => syncValues(input, slider));
+            slider.addEventListener('input', () => syncValues(slider, input));
+        }
+    });
+}
+
+function updateCalculations() {
+    const data = getFormData();
+    if (isNaN(data.totalWeight)) return;
+
+    const setup = calculateFullSetup(data.totalWeight, data.frontRatio, data.buildType, data.drivetrain);
+    renderResults(setup);
+}
+
 const renderResults = (setup) => {
     Object.keys(setup).forEach(category => {
         if (category === 'diff' || category === 'drivetrain') return;
@@ -64,31 +93,11 @@ const renderDiff = (diff, drivetrain) => {
     }
 };
 
-function updateCalculations() {
-    const data = getFormData();
-    if (isNaN(data.totalWeight)) return;
 
-    const setup = calculateFullSetup(data.totalWeight, data.frontRatio, data.buildType, data.drivetrain);
-    renderResults(setup);
-}
 
-function setupDynamicSync() {
-    const sliders = [
-        { id: 'weight-total' },
-        { id: 'weight-front' }
-    ];
 
-    sliders.forEach(s => {
-        const input = document.getElementById(s.id);
-        const slider = document.getElementById(s.id + '-slider');
-        if (input && slider) {
-            input.addEventListener('input', () => syncValues(input, slider));
-            slider.addEventListener('input', () => syncValues(slider, input));
-        }
-    });
 
-    document.getElementById('calc-btn').addEventListener('click', updateCalculations);
-}
+
 
 // Inicjalizacja modali
 function initModals() {
@@ -102,7 +111,7 @@ function initModals() {
 }
 
 function init() {
-    setupDynamicSync();
+    setupEventListeners();
     initModals();
 }
 

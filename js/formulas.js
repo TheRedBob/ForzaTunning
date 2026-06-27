@@ -2,6 +2,14 @@
  * @file Moduł matematyczny tuningu.
  */
 
+export const getTires = (d) => {
+    const base = 1.6;
+    return {
+        front: round(base + (d.rearF - d.frontF) * 0.2 + (d.drivetrain === 'fwd' ? 0.1 : 0)),
+        rear: round(base + (d.frontF - d.rearF) * 0.2 + (d.drivetrain === 'rwd' ? 0.1 : 0))
+    };
+};
+
 const round = (num) => Math.round(num * 10) / 10;
 
 export const getSprings = (d) => {
