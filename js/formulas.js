@@ -118,6 +118,7 @@ export function calculateFullSetup(totalWeight, frontRatio, buildType, drivetrai
         aero: getAero(data),
         brakes: getBrakes(data),
         diff: getDiff(data),
+        geometry: getGeometry(data),
         drivetrain: drivetrain
     };
 }
