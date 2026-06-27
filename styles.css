@@ -23,7 +23,7 @@ h1 {
 /* --- 2. LAYOUT (Kontenery i siatki) --- */
 .panel-container {
     width: 90%;
-    max-width: 500px;
+    max-width: 900px;
     margin: 40px auto;
     padding: 30px;
     background-color: #161922;

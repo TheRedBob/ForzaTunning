@@ -50,7 +50,7 @@
                         <select id="build-type" class="custom-select">
                             <option value="road">Wyścigi szosowe</option>
                             <option value="rally">Rajdy / Szuter</option>
-                            <option value="drift">Drift</option>
+                            <option value="offroad">Offroad</option>
                         </select>
                     </div>
                 </div>
@@ -64,127 +64,39 @@
                         </select>
                     </div>
                 </div>
+                <div class="input-group">
+                    <label for="tires-type">Rodzaj opon:</label>
+                    <div class="select-wrapper">
+                        <select id="tires-type" class="custom-select">
+                            <option value="slick">Slick</option>
+                            <option value="semislick">Semi-slick</option>
+                            <option value="stock_street_rally">Fabryczne, uliczne, rajdowe</option>
+                            <option value="offroad">Terenowe</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="label-row">
+                    <label for="areo-front">Areo - przód:</label>
+                    <div class="number-container">
+                        <input id="areo-front" class="number-input" type="number" min="0" max="200" value="100">
+                        <span>KGF</span>
+                    </div>
+                </div>
+                <input id="areo-front-slider" class="custom-slider" type="range" min="0" max="200" value="100">
             </div>
         </div>
 
         <button id="calc-btn" class="submit-btn">Oblicz ustawienia pojazdu</button>
     </div>
 
-    <div id="results-section" class="panel-container"><h2>Ustawienia</h2></div>
-
     <div id="results-section" class="panel-container">
-        <h2>Sugerowane Ustawienia</h2>
-        <h3 class="section-header">Opony</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Ciśnienie (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Zmniejszenie ciśnienia zwiększa powierzchnię styku i przyczepność, ale opona szybciej się przegrzewa.&#10;&#10;Tył: Zwiększenie ciśnienia usztywnia oponę, dając lepszą reakcję i stabilność, ale zmniejsza przyczepność mechaniczną.">?</span>
-                </span>
-                <div class="card-value"><span id="res-tires-front">0.0</span> / <span id="res-tires-rear">0.0</span>
-                    <span class="unit">bar</span>
-                </div>
-            </div>
-        </div>
+        <h2>Ustawienia</h2>
+    </div>
 
-        <h3 class="section-header">Geometria</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Kąt pochylenia (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Większy negatyw poprawia przyczepność w zakrętach, ale zmniejsza powierzchnię styku podczas hamowania.&#10;&#10;Tył: Zmniejszenie negatywu poprawia stabilność podczas przyspieszania na prostych.">?</span>
-                </span>
-                <div class="card-value"><span id="res-geometry-camberFront">0.0</span> / <span
-                        id="res-geometry-camberRear">0.0</span></div>
-                <span class="unit">stopień</span>
-            </div>
-            <div class="result-card">
-                <span class="card-label">Zbieżność (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód (Toe-out): Zwiększa szybkość reakcji na skręt (agresywniejsze wejście), ale auto staje się bardziej nerwowe.&#10;&#10;Tył (Toe-in): Zwiększa stabilność podczas przyspieszania na wyjściu z zakrętu.">?</span>
-                </span>
-                <div class="card-value"><span id="res-geometry-toeFront">0.0</span> / <span
-                        id="res-geometry-toeRear">0.0</span></div>
-                <span class="unit">stopień</span>
-            </div>
-        </div>
 
-        <h3 class="section-header">Stabilizatory (ARB)</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Sztywność (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Usztywnienie zwiększa podsterowność, poprawiając stabilność przy wysokich prędkościach.&#10;&#10;Tył: Usztywnienie zwiększa nadsterowność, pomagając w szybszej zmianie kierunku, ale kosztem stabilności.">?</span>
-                </span>
-                <div class="card-value"><span id="res-arb-front">0.0</span> / <span id="res-arb-rear">0.0</span></div>
-            </div>
-        </div>
-
-        <h3 class="section-header">Resory</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Twardość (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Twardsze sprężyny ograniczają nurkowanie przy hamowaniu i poprawiają reakcję.&#10;&#10;Tył: Twardsze sprężyny zmniejszają przysiad przy starcie i poprawiają stabilność w szybkich łukach.">?</span>
-                </span>
-                <div class="card-value"><span id="res-springs-front">0.0</span> / <span id="res-springs-rear">0.0</span>
-                </div>
-                <span class="unit">KGF/MM</span>
-            </div>
-            <div class="result-card">
-                <span class="card-label">Wysokość (P / T)</span>
-                <div class="card-value"><span id="res-rideHeight-front"></span> / <span id="res-rideHeight-rear"></span>
-                </div>
-            </div>
-        </div>
-
-        <h3 class="section-header">Tłumienie</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Odbicie (Rebound)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Zwiększenie tłumienia odbicia poprawia reakcję na skręt, ale pogarsza wybieranie wybojów.&#10;&#10;Tył: Zwiększenie tłumienia odbicia stabilizuje tył auta przy szybkich zmianach masy.">?</span>
-                </span>
-                <div class="card-value"><span id="res-damping-reboundFront">0.0</span> / <span
-                        id="res-damping-reboundRear">0.0</span></div>
-            </div>
-            <div class="result-card">
-                <span class="card-label">Dobicie (Bump)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Zwiększenie dobicia usztywnia zawieszenie przy szybkim obciążeniu (np. krawężniki), poprawiając precyzję.&#10;&#10;Tył: Zwiększenie dobicia zapobiega 'dobijaniu' zawieszenia przy dużym obciążeniu aerodynamicznym.">?</span>
-                </span>
-                <div class="card-value"><span id="res-damping-bumpFront">0.0</span> / <span
-                        id="res-damping-bumpRear">0.0</span></div>
-            </div>
-        </div>
-
-        <h3 class="section-header">Aerodynamika</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Balans Areo (P/T)
-                    <span class="help-icon"
-                        data-tooltip="Przód: Zwiększenie docisku poprawia przyczepność w szybkich zakrętach, ale zwiększa opór aerodynamiczny (niższa prędkość max).&#10;&#10;Tył: Zwiększenie docisku poprawia stabilność przy wysokich prędkościach.">?</span>
-                </span>
-                <div class="card-value" id="res-aero-balance">
-                    0% / 0%
-                </div>
-            </div>
-        </div>
-
-        <h3 class="section-header">Hamulce</h3>
-        <div class="results-grid">
-            <div class="result-card">
-                <span class="card-label">Hamulce (Balans / Ciśnienie)</span>
-                <div class="card-value"><span id="res-brakes-bias"></span>% / <span id="res-brakes-pressure"></span>%
-                </div>
-            </div>
-        </div>
-
-        <h3 class="section-header">Dyferencjał</h3>
-        <div id="diff-results-container" class="results-grid">
-        </div>
-
-        <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 
 </html>
