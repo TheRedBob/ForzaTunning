@@ -1,0 +1,270 @@
+/* --- 1. FUNDAMENTY (Reset & Globalne) --- */
+body {
+    background-color: #2f323d;
+    font-family: 'Montserrat', Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+h1 {
+    color: #ff0055;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+/* --- 2. LAYOUT (Kontenery i siatki) --- */
+.panel-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #161922;
+    border: 1px solid #242936;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.calc-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.double-input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* --- 3. KOMPONENTY FORMULARZA --- */
+.number-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.number-input,
+.custom-slider,
+select {
+    font-size: 1rem;
+}
+
+.number-input {
+    background-color: #242936;
+    border: 1px solid #3f4659;
+    border-radius: 6px;
+    color: #ffffff;
+    padding: 6px;
+    width: 55px;
+    text-align: center;
+}
+
+.custom-slider {
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+select {
+    appearance: none;
+    background-color: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+    padding: 10px 30px 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+select:hover {
+    border-color: #007bff;
+}
+
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #888;
+    font-size: 0.6rem;
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid #007bff;
+    border-color: transparent;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- 4. WYNIKI (Kafelki) --- */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.result-card {
+    background-color: #242936;
+    border: 1px solid #3f4659;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.result-card:hover {
+    border-color: #5d6680;
+}
+
+.card-label {
+    display: block;
+    color: #a0a0a0;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.unit {
+    font-size: 0.8rem;
+    color: #007bff;
+    margin-left: 4px;
+}
+
+/* --- 5. RESPONSYWNOŚĆ I NARZĘDZIA --- */
+@media (max-width: 480px) {
+    .double-input-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #161922;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3f4659;
+    border-radius: 4px;
+}
+
+
+
+.section-header {
+    color: #fdfdfd;
+    font-size: 1.1rem;
+    margin: 5px 0 5 px 0;
+    text-transform: uppercase;
+    border-left: 4px solid #007bff;
+    padding-left: 5px;
+}
+
+
+/* Kontener okna */
+dialog {
+    border: 1px solid #007bff;
+    background: #1b1e2b;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Ważne: To musi mieć position: relative, żeby X się do niego "przykleił" */
+.modal-content {
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Stylizacja przycisku X */
+.close-btn {
+    position: absolute;
+    top: -10px;
+    /* Przesunięcie do góry */
+    right: -10px;
+    /* Przesunięcie do prawej */
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+#modal-text {
+    padding-right: 30px;
+    margin: 0;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.help-icon {
+    cursor: pointer;
+    padding: 2px 8px;
+    background: #333;
+    border-radius: 50%;
+    user-select: none;
+}
